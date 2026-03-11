@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUMPALISA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      color: #f0e6d3;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 2rem;
+      background: radial-gradient(ellipse at center, #1a1410 0%, #0a0a0a 70%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="1" height="1" fill="rgba(255,215,0,0.03)"/></svg>') repeat;
+      pointer-events: none;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-align: center;
+      background: linear-gradient(135deg, #d4af37, #f5e6a3, #d4af37, #aa8a2e);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 4s ease infinite;
+      margin-bottom: 0.5rem;
+      text-shadow: none;
+      filter: drop-shadow(0 0 30px rgba(212,175,55,0.3));
+    }
+
+    @keyframes goldShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: #c9b88c;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 2px rgba(212,175,55,0.3),
+        0 20px 60px rgba(0,0,0,0.8),
+        0 0 100px rgba(212,175,55,0.1);
+    }
+
+    .hero-image-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #8a7a5a;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* Story Section */
+    .story {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    .story-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #d4af37;
+    }
+
+    .story p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #b8a88a;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .story .highlight {
+      color: #00d672;
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      margin: 4rem auto;
+    }
+
+    /* Gallery */
+    .gallery {
+      padding: 4rem 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #d4af37;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gallery-grid .gallery-item:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #c9b88c;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(212,175,55,0.15);
+    }
+
+    .footer .pill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer p {
+      color: #6a5a3a;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+    }
+
+    .footer a {
+      color: #00d672;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 2rem;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 4px;
+      box-shadow: 0 0 80px rgba(212,175,55,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="title">PUMPALISA</h1>
+    <p class="subtitle">The Mona Lisa has been replaced</p>
+    <div class="hero-image-wrapper">
+      <img src="images/louvre-closeup.png" alt="PumpFun in the Louvre">
+    </div>
+    <span class="scroll-hint">scroll down</span>
+  </section>
+
+  <!-- Story -->
+  <section class="story">
+    <h2 class="story-heading">A New Masterpiece</h2>
+    <p>
+      For over 500 years, the Mona Lisa held the world's attention behind bulletproof glass in the Louvre.
+      Leonardo da Vinci could never have imagined what would come next.
+    </p>
+    <p>
+      We walked into the most famous museum on Earth and placed a
+      <span class="highlight">pump.fun</span> pill where the Mona Lisa once hung.
+      No permission. No apologies. Just pure, unfiltered degen energy in the heart of high culture.
+    </p>
+    <p>
+      The green pill now sits in the golden frame, watched over by the same crowds
+      who once gazed at Lisa Gherardini's enigmatic smile.
+      Art history was made &mdash; and the blockchain was the canvas.
+    </p>
+    <div class="divider"></div>
+    <p style="font-style: italic; color: #8a7a5a;">
+      "If da Vinci were alive today, he'd be launching on pump.fun."
+    </p>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery">
+    <h2 class="gallery-heading">The Evidence</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="images/louvre-full.png" alt="Full view of the Louvre installation">
+        <div class="caption">The full scene &mdash; pump.fun enters the Louvre</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="images/louvre-wide.png" alt="Wide shot of PumpFun at the Louvre">
+        <div class="caption">Where millions once gathered for Mona Lisa</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="images/louvre-closeup.png" alt="Close-up of PumpFun in the frame">
+        <div class="caption">The green pill &mdash; up close and personal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="pill-icon">💊</div>
+    <p>PUMPALISA &copy; 2026 &mdash; Art is dead. Long live the pump.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://pump.fun" target="_blank">pump.fun</a>
+    </p>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    function openLightbox(el) {
+      const src = el.querySelector('img').src;
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>
